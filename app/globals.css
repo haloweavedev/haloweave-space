@@ -3,8 +3,8 @@
 :root {
   --background: #0a0a0a;
   --foreground: #ededed;
-  --gold: #d4af37;
-  --gold-light: #f0d060;
+  --gold: #f0b429;
+  --gold-light: #f7d26a;
 }
 
 @theme inline {
@@ -12,9 +12,10 @@
   --color-foreground: var(--foreground);
   --color-gold: var(--gold);
   --color-gold-light: var(--gold-light);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-serif: var(--font-playfair);
+  --font-sans: var(--font-product-sans);
+  --font-mono: var(--font-product-sans);
+  --font-serif: var(--font-product-sans);
+  --font-display: var(--font-display);
 }
 
 html,
@@ -38,19 +39,15 @@ body {
 }
 
 .bg-scroll-track {
-  display: flex;
-  flex-direction: column;
   width: 100%;
-  height: 1200vh;
   will-change: transform;
   animation: bg-scroll-up 500s linear infinite;
 }
 
 .bg-scroll-panel {
-  flex: 0 0 100vh;
+  display: block;
   width: 100%;
-  background-size: cover;
-  background-position: center;
+  height: auto;
 }
 
 .bg-scroll-overlay {
@@ -65,8 +62,28 @@ body {
     transform: translate3d(0, 0, 0);
   }
   to {
-    transform: translate3d(0, -600vh, 0);
+    transform: translate3d(0, -50%, 0);
   }
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    text-shadow:
+      0 0 10px rgba(240, 180, 41, 0.6),
+      0 0 30px rgba(240, 180, 41, 0.4),
+      0 0 60px rgba(240, 180, 41, 0.2);
+  }
+  50% {
+    text-shadow:
+      0 0 15px rgba(247, 210, 106, 0.8),
+      0 0 40px rgba(240, 180, 41, 0.6),
+      0 0 80px rgba(240, 180, 41, 0.35),
+      0 0 120px rgba(240, 180, 41, 0.15);
+  }
+}
+
+.animate-glow {
+  animation: glow-pulse 3s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

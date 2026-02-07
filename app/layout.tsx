@@ -1,21 +1,28 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const boone = localFont({
+  src: "../public/BOONE.otf",
+  variable: "--font-display",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+const productSans = localFont({
+  src: [
+    { path: "../public/google sans/ProductSans-Thin.ttf", weight: "100", style: "normal" },
+    { path: "../public/google sans/ProductSans-ThinItalic.ttf", weight: "100", style: "italic" },
+    { path: "../public/google sans/ProductSans-Light.ttf", weight: "300", style: "normal" },
+    { path: "../public/google sans/ProductSans-LightItalic.ttf", weight: "300", style: "italic" },
+    { path: "../public/google sans/ProductSans-Regular.ttf", weight: "400", style: "normal" },
+    { path: "../public/google sans/ProductSans-Italic.ttf", weight: "400", style: "italic" },
+    { path: "../public/google sans/ProductSans-Medium.ttf", weight: "500", style: "normal" },
+    { path: "../public/google sans/ProductSans-MediumItalic.ttf", weight: "500", style: "italic" },
+    { path: "../public/google sans/ProductSans-Bold.ttf", weight: "700", style: "normal" },
+    { path: "../public/google sans/ProductSans-BoldItalic.ttf", weight: "700", style: "italic" },
+    { path: "../public/google sans/ProductSans-Black.ttf", weight: "900", style: "normal" },
+    { path: "../public/google sans/ProductSans-BlackItalic.ttf", weight: "900", style: "italic" },
+  ],
+  variable: "--font-product-sans",
 });
 
 export const metadata: Metadata = {
@@ -32,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} antialiased`}
+        className={`${boone.variable} ${productSans.variable} antialiased`}
       >
         {children}
       </body>

@@ -11,17 +11,19 @@ export default function Home() {
       <div className="relative z-10 flex h-full items-center">
         {/* Hero text — left */}
         <div className="flex flex-1 flex-col justify-center pl-12 pr-4 md:pl-20 lg:pl-28">
-          <span className="mb-6 inline-block text-[0.7rem] font-sans tracking-[0.35em] uppercase text-gold/80">
-            Haloweave
-          </span>
+          <img
+            src="/logo-horizontal.svg"
+            alt="Haloweave"
+            className="mb-4 h-8 w-auto self-start opacity-80"
+          />
 
           <h1
-            className="mb-6 font-serif font-medium text-white leading-[1.15]"
+            className="mb-3 font-display text-white leading-[0.95] tracking-[-0.03em]"
             style={{
               fontSize: "clamp(2.4rem, 5vw, 4.2rem)",
               textWrap: "balance",
               textShadow:
-                "0 0 40px rgba(212,175,55,0.15), 0 0 80px rgba(212,175,55,0.06)",
+                "0 0 40px rgba(240,180,41,0.15), 0 0 80px rgba(240,180,41,0.06)",
             }}
           >
             Built for the next era
@@ -29,13 +31,13 @@ export default function Home() {
             of software.
           </h1>
 
-          <p className="mb-4 max-w-lg font-serif italic text-gold/70 leading-relaxed"
-            style={{ fontSize: "clamp(1.05rem, 1.6vw, 1.25rem)" }}
+          <p className="mb-3 max-w-lg font-sans text-gold/70 leading-snug"
+            style={{ fontSize: "clamp(1.25rem, 2vw, 1.6rem)" }}
           >
-            The future of the web is intelligent.
+            The future of the web is <span className="font-display uppercase text-white animate-glow">intelligent.</span>
           </p>
 
-          <p className="mb-10 max-w-md font-sans text-[0.95rem] leading-7 text-white/55">
+          <p className="mb-8 max-w-md font-sans text-[0.95rem] leading-relaxed text-white/55">
             Products no longer just respond&nbsp;&mdash; they understand,
             assist, and evolve. We work with founders and teams to design
             and build AI products that feel inevitable.
@@ -46,9 +48,9 @@ export default function Home() {
               href="#contact"
               className="inline-flex items-center rounded-full px-7 py-3 text-[0.8rem] font-sans tracking-[0.12em] uppercase text-[#0a0a0a] no-underline transition-[opacity,transform] duration-300 hover:opacity-90 hover:-translate-y-px focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-gold/60"
               style={{
-                background: "linear-gradient(135deg, #d4af37, #f0d060, #d4af37)",
+                background: "linear-gradient(135deg, #f0b429, #f7d26a, #f0b429)",
                 boxShadow:
-                  "0 0 20px rgba(212,175,55,0.25), 0 0 60px rgba(212,175,55,0.08)",
+                  "0 0 20px rgba(240,180,41,0.25), 0 0 60px rgba(240,180,41,0.08)",
               }}
             >
               Begin your mission
@@ -68,12 +70,21 @@ export default function Home() {
             className="pointer-events-none absolute top-1/2 left-1/2 z-0 h-[70%] w-[70%] -translate-x-1/2 -translate-y-1/2"
             style={{
               background:
-                "radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)",
+                "radial-gradient(circle, rgba(240,180,41,0.08) 0%, transparent 70%)",
             }}
           />
           <Scene />
         </div>
       </div>
+      {/* Noise overlay */}
+      <div
+        className="pointer-events-none absolute inset-0 z-20 opacity-[0.15]"
+        style={{
+          backgroundImage: "url(/noise.png)",
+          backgroundRepeat: "repeat",
+          backgroundSize: "216px auto",
+        }}
+      />
     </div>
   );
 }

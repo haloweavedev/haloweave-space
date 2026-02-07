@@ -16,10 +16,12 @@ export default function Background() {
     <div className="bg-scroll-container">
       <div className="bg-scroll-track">
         {doubled.map((src, i) => (
-          <div
+          <img
             key={`bg-${i}`}
+            src={src}
+            alt=""
             className="bg-scroll-panel"
-            style={{ backgroundImage: `url(${src})` }}
+            draggable={false}
           />
         ))}
       </div>

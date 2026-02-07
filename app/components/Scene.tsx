@@ -1,8 +1,9 @@
 "use client";
 
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Bounds, Html, OrbitControls, useGLTF, useProgress } from "@react-three/drei";
+import { Bounds, Environment, Html, OrbitControls, useGLTF, useProgress } from "@react-three/drei";
+import * as THREE from "three";
 
 const MODEL_PATH = "/haloweave-clean-gold-gltf/26_02_07_08_28_36_448.gltf";
 const TILT_RANGE = Math.PI / 7;
@@ -14,7 +15,18 @@ function Loader() {
 
 function Model() {
   const { scene } = useGLTF(MODEL_PATH);
-  return <primitive object={scene} castShadow receiveShadow />;
+
+  useEffect(() => {
+    scene.traverse((child) => {
+      if (child instanceof THREE.Mesh && child.material) {
+        const mat = child.material as THREE.MeshStandardMaterial;
+        mat.envMapIntensity = 1.5;
+        mat.needsUpdate = true;
+      }
+    });
+  }, [scene]);
+
+  return <primitive object={scene} />;
 }
 
 useGLTF.preload(MODEL_PATH);
@@ -22,24 +34,31 @@ useGLTF.preload(MODEL_PATH);
 export default function Scene() {
   return (
     <Canvas
-      shadows
       camera={{ position: [0, 0, 6], fov: 45, near: 0.1, far: 2000 }}
       style={{ position: "absolute", inset: 0, zIndex: 1 }}
-      gl={{ alpha: true, antialias: true }}
+      gl={{
+        alpha: true,
+        antialias: true,
+        toneMapping: THREE.ACESFilmicToneMapping,
+        toneMappingExposure: 1.0,
+      }}
     >
-      <directionalLight color="#fff6e8" intensity={1.0} position={[7, 9, 8]} />
-      <directionalLight color="#e8f2ff" intensity={0.55} position={[-6, 4, -5]} />
-      <directionalLight color="#ffffff" intensity={0.28} position={[0, -6, 2]} />
+      <directionalLight color="#fff6e8" intensity={0.7} position={[5, 8, 7]} />
+
       <Suspense fallback={<Loader />}>
+        <Environment preset="sunset" />
         <Bounds fit clip observe margin={1.35}>
           <Model />
         </Bounds>
       </Suspense>
+
       <OrbitControls
         makeDefault
         enablePan={false}
         enableRotate
         enableZoom={false}
+        autoRotate
+        autoRotateSpeed={0.4}
         minPolarAngle={Math.PI / 2 - TILT_RANGE}
         maxPolarAngle={Math.PI / 2 + TILT_RANGE}
         rotateSpeed={0.7}
