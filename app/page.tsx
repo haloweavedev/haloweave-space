@@ -1,65 +1,79 @@
-import Image from "next/image";
+"use client";
+
+import Background from "./components/Background";
+import Scene from "./components/Scene";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="relative h-screen w-screen overflow-hidden">
+      <Background />
+
+      <div className="relative z-10 flex h-full items-center">
+        {/* Hero text — left */}
+        <div className="flex flex-1 flex-col justify-center pl-12 pr-4 md:pl-20 lg:pl-28">
+          <span className="mb-6 inline-block text-[0.7rem] font-sans tracking-[0.35em] uppercase text-gold/80">
+            Haloweave
+          </span>
+
+          <h1
+            className="mb-6 font-serif font-medium text-white leading-[1.15]"
+            style={{
+              fontSize: "clamp(2.4rem, 5vw, 4.2rem)",
+              textWrap: "balance",
+              textShadow:
+                "0 0 40px rgba(212,175,55,0.15), 0 0 80px rgba(212,175,55,0.06)",
+            }}
+          >
+            Built for the next era
+            <br />
+            of software.
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+
+          <p className="mb-4 max-w-lg font-serif italic text-gold/70 leading-relaxed"
+            style={{ fontSize: "clamp(1.05rem, 1.6vw, 1.25rem)" }}
+          >
+            The future of the web is intelligent.
           </p>
+
+          <p className="mb-10 max-w-md font-sans text-[0.95rem] leading-7 text-white/55">
+            Products no longer just respond&nbsp;&mdash; they understand,
+            assist, and evolve. We work with founders and teams to design
+            and build AI products that feel inevitable.
+          </p>
+
+          <div className="flex items-center gap-4">
+            <a
+              href="#contact"
+              className="inline-flex items-center rounded-full px-7 py-3 text-[0.8rem] font-sans tracking-[0.12em] uppercase text-[#0a0a0a] no-underline transition-[opacity,transform] duration-300 hover:opacity-90 hover:-translate-y-px focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-gold/60"
+              style={{
+                background: "linear-gradient(135deg, #d4af37, #f0d060, #d4af37)",
+                boxShadow:
+                  "0 0 20px rgba(212,175,55,0.25), 0 0 60px rgba(212,175,55,0.08)",
+              }}
+            >
+              Begin your mission
+            </a>
+            <a
+              href="#work"
+              className="inline-flex items-center rounded-full border border-white/15 px-7 py-3 text-[0.8rem] font-sans tracking-[0.12em] uppercase text-white/70 no-underline transition-[border-color,color,transform] duration-300 hover:border-gold/40 hover:text-white hover:-translate-y-px focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-gold/60"
+            >
+              View our work
+            </a>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* 3D model — right */}
+        <div className="relative h-full flex-1">
+          <div
+            className="pointer-events-none absolute top-1/2 left-1/2 z-0 h-[70%] w-[70%] -translate-x-1/2 -translate-y-1/2"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)",
+            }}
+          />
+          <Scene />
         </div>
-      </main>
+      </div>
     </div>
   );
 }
