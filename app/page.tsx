@@ -31,35 +31,24 @@ export default function Home() {
             of software.
           </h1>
 
-          <p className="mb-3 max-w-lg font-sans text-gold/70 leading-snug"
+          <p className="mb-3 max-w-lg font-sans text-gold leading-snug"
             style={{ fontSize: "clamp(1.25rem, 2vw, 1.6rem)" }}
           >
             The future of the web is <span className="font-display uppercase text-white animate-glow">intelligent.</span>
           </p>
 
-          <p className="mb-8 max-w-md font-sans text-[0.95rem] leading-relaxed text-white/55">
+          <p className="mb-8 max-w-xl font-sans text-[0.95rem] leading-snug text-white/55">
             Products no longer just respond&nbsp;&mdash; they understand,
             assist, and evolve. We work with founders and teams to design
             and build AI products that feel inevitable.
           </p>
 
           <div className="flex items-center gap-4">
-            <a
-              href="#contact"
-              className="inline-flex items-center rounded-full px-7 py-3 text-[0.8rem] font-sans tracking-[0.12em] uppercase text-[#0a0a0a] no-underline transition-[opacity,transform] duration-300 hover:opacity-90 hover:-translate-y-px focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-gold/60"
-              style={{
-                background: "linear-gradient(135deg, #f0b429, #f7d26a, #f0b429)",
-                boxShadow:
-                  "0 0 20px rgba(240,180,41,0.25), 0 0 60px rgba(240,180,41,0.08)",
-              }}
-            >
+            <a href="#contact" className="btn-gold">
               Begin your mission
             </a>
-            <a
-              href="#work"
-              className="inline-flex items-center rounded-full border border-white/15 px-7 py-3 text-[0.8rem] font-sans tracking-[0.12em] uppercase text-white/70 no-underline transition-[border-color,color,transform] duration-300 hover:border-gold/40 hover:text-white hover:-translate-y-px focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-gold/60"
-            >
-              View our work
+            <a href="#work" className="btn-glass">
+              <span>View our work</span>
             </a>
           </div>
         </div>
@@ -78,7 +67,7 @@ export default function Home() {
       </div>
       {/* Noise overlay */}
       <div
-        className="pointer-events-none absolute inset-0 z-20 opacity-[0.15]"
+        className="pointer-events-none absolute inset-0 z-20 opacity-[0.18]"
         style={{
           backgroundImage: "url(/noise.png)",
           backgroundRepeat: "repeat",

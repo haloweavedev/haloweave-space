@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import LenisProvider from "./components/LenisProvider";
+import CustomCursor from "./components/CustomCursor";
 import "./globals.css";
 
 const boone = localFont({
@@ -41,7 +43,10 @@ export default function RootLayout({
       <body
         className={`${boone.variable} ${productSans.variable} antialiased`}
       >
-        {children}
+        <LenisProvider>
+          {children}
+        </LenisProvider>
+        <CustomCursor />
       </body>
     </html>
   );
