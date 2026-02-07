@@ -14,13 +14,13 @@ export default function Home() {
           <img
             src="/logo-horizontal.svg"
             alt="Haloweave"
-            className="mb-6 h-8 w-auto self-start opacity-80"
+            className="mb-5 h-5 w-auto self-start opacity-80"
           />
 
           <h1
-            className="mb-4 font-display text-white leading-[1.05] tracking-[-0.03em]"
+            className="mb-3 font-display text-white leading-[1.05] tracking-[-0.03em]"
             style={{
-              fontSize: "clamp(2.4rem, 5vw, 4.2rem)",
+              fontSize: "clamp(1.7rem, 3.2vw, 2.8rem)",
               textWrap: "balance",
               textShadow:
                 "0 0 40px rgba(240,180,41,0.15), 0 0 80px rgba(240,180,41,0.06)",
@@ -31,13 +31,13 @@ export default function Home() {
             of software.
           </h1>
 
-          <p className="mb-5 max-w-lg font-sans text-gold leading-snug"
-            style={{ fontSize: "clamp(1.25rem, 2vw, 1.6rem)" }}
+          <p className="mb-4 max-w-lg font-sans text-gold leading-snug"
+            style={{ fontSize: "clamp(0.95rem, 1.3vw, 1.15rem)" }}
           >
             The future of the web is <span className="font-display uppercase text-white animate-glow">intelligent.</span>
           </p>
 
-          <p className="mb-10 max-w-xl font-sans text-[1rem] leading-relaxed text-white/55">
+          <p className="mb-8 max-w-xl font-sans text-[0.85rem] leading-relaxed text-white/55">
             Products no longer just respond&nbsp;&mdash; they understand,
             assist, and evolve. We work with founders and teams to design
             and build AI products that feel inevitable.
