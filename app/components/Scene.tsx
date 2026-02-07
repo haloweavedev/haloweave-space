@@ -34,7 +34,12 @@ useGLTF.preload(MODEL_PATH);
 export default function Scene() {
   return (
     <Canvas
-      camera={{ position: [0, 0, 6], fov: 45, near: 0.1, far: 2000 }}
+      camera={{
+        position: [205.34, -45.25, -360.12],
+        fov: 45,
+        near: 0.1,
+        far: 2000,
+      }}
       style={{ position: "absolute", inset: 0, zIndex: 1 }}
       gl={{
         alpha: true,
@@ -54,11 +59,12 @@ export default function Scene() {
 
       <OrbitControls
         makeDefault
+        target={[0.0038, 150.4618, 0]}
         enablePan={false}
         enableRotate
         enableZoom={false}
         autoRotate
-        autoRotateSpeed={0.4}
+        autoRotateSpeed={-0.4}
         minPolarAngle={Math.PI / 2 - TILT_RANGE}
         maxPolarAngle={Math.PI / 2 + TILT_RANGE}
         rotateSpeed={0.7}
