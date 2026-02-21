@@ -88,15 +88,11 @@ export default function Home() {
           </p>
 
           <div
-            className="hero-reveal hero-actions"
+            className="hero-reveal hero-badge"
             style={{ animationDelay: "0.75s" }}
           >
-            <a href="#contact" className="btn-gold">
-              Begin Your Mission
-            </a>
-            <a href="#work" className="btn-glass">
-              <span>View Our Work</span>
-            </a>
+            <span className="badge-dot" aria-hidden="true" />
+            <span>cooking something crazy &mdash; stay tuned</span>
           </div>
         </div>
       </div>

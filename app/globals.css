@@ -262,7 +262,7 @@ button {
 /* --- Typography --- */
 
 .hero-logo {
-  height: clamp(16px, 1.4vw + 4px, 22px);
+  height: clamp(18px, 1.6vw + 4px, 26px);
   width: auto;
   align-self: flex-start;
   opacity: 0.8;
@@ -271,7 +271,7 @@ button {
 
 .hero-heading {
   font-family: var(--font-display);
-  font-size: clamp(1.5rem, 2.5vw + 0.5rem, 3.5rem);
+  font-size: clamp(1.6rem, 3vw + 0.5rem, 4rem);
   line-height: 1.05;
   letter-spacing: -0.03em;
   color: white;
@@ -284,7 +284,7 @@ button {
 
 .hero-subtitle {
   font-family: var(--font-product-sans);
-  font-size: clamp(0.9rem, 0.8vw + 0.5rem, 1.3rem);
+  font-size: clamp(0.95rem, 0.9vw + 0.5rem, 1.4rem);
   line-height: 1.4;
   color: var(--gold);
   margin-bottom: clamp(0.5rem, 1.2vh, 1rem);
@@ -298,7 +298,7 @@ button {
 
 .hero-body {
   font-family: var(--font-product-sans);
-  font-size: clamp(0.85rem, 0.3vw + 0.55rem, 1rem);
+  font-size: clamp(0.9rem, 0.35vw + 0.55rem, 1.05rem);
   line-height: 1.65;
   color: rgba(255, 255, 255, 0.55);
   max-width: 32rem;
@@ -311,6 +311,42 @@ button {
   align-items: center;
   gap: clamp(0.6rem, 2vw, 1rem);
   flex-wrap: wrap;
+}
+
+/* Under development badge */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 18px;
+  border-radius: 100px;
+  font-family: var(--font-product-sans);
+  font-size: clamp(0.7rem, 0.2vw + 0.5rem, 0.82rem);
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  width: fit-content;
+}
+
+.badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 6px rgba(240, 180, 41, 0.6);
+  animation: badge-pulse 2s ease-in-out infinite;
+}
+
+@keyframes badge-pulse {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 6px rgba(240, 180, 41, 0.6);
+  }
+  50% {
+    opacity: 0.4;
+    box-shadow: 0 0 2px rgba(240, 180, 41, 0.3);
+  }
 }
 
 /* --- Text reveal animation --- */
@@ -492,6 +528,10 @@ button {
 
   .animate-glow,
   .hero-highlight {
+    animation: none;
+  }
+
+  .badge-dot {
     animation: none;
   }
 

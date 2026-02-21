@@ -37,8 +37,8 @@ export default function CustomCursor() {
     const lerp = (a: number, b: number, n: number) => a + (b - a) * n;
 
     const animate = () => {
-      pos.current.x = lerp(pos.current.x, target.current.x, 0.25);
-      pos.current.y = lerp(pos.current.y, target.current.y, 0.25);
+      pos.current.x = lerp(pos.current.x, target.current.x, 0.55);
+      pos.current.y = lerp(pos.current.y, target.current.y, 0.55);
       cursor.style.transform = `translate3d(${pos.current.x}px, ${pos.current.y}px, 0)`;
       raf.current = requestAnimationFrame(animate);
     };
