@@ -96,7 +96,7 @@ export default function Home() {
               <span>cooking something crazy &mdash; stay tuned</span>
             </div>
             <a href="mailto:hello@haloweave.com" className="btn-glass">
-              <span>hello@haloweave.com</span>
+              <span>Say Hello</span>
             </a>
           </div>
         </div>
