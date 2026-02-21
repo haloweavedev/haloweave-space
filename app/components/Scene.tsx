@@ -1,16 +1,19 @@
 "use client";
 
-import { Suspense, useEffect } from "react";
+import { Suspense, useEffect, useCallback } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Bounds, Environment, Html, OrbitControls, useGLTF, useProgress } from "@react-three/drei";
+import { Bounds, Environment, OrbitControls, useGLTF, useProgress } from "@react-three/drei";
 import * as THREE from "three";
 
 const MODEL_PATH = "/haloweave-3d-gold-gltf/26_02_07_22_43_34_379.gltf";
 const TILT_RANGE = Math.PI / 7;
 
-function Loader() {
+function ProgressTracker({ onProgress }: { onProgress: (p: number) => void }) {
   const { progress } = useProgress();
-  return <Html center>{`${progress.toFixed(0)}% loaded`}</Html>;
+  useEffect(() => {
+    onProgress(progress);
+  }, [progress, onProgress]);
+  return null;
 }
 
 function Model() {
@@ -31,7 +34,12 @@ function Model() {
 
 useGLTF.preload(MODEL_PATH);
 
-export default function Scene() {
+export default function Scene({ onProgress }: { onProgress?: (p: number) => void }) {
+  const handleProgress = useCallback(
+    (p: number) => onProgress?.(p),
+    [onProgress]
+  );
+
   return (
     <Canvas
       camera={{
@@ -50,7 +58,9 @@ export default function Scene() {
     >
       <directionalLight color="#fff6e8" intensity={0.5} position={[5, 8, 7]} />
 
-      <Suspense fallback={<Loader />}>
+      {onProgress && <ProgressTracker onProgress={handleProgress} />}
+
+      <Suspense fallback={null}>
         <Environment preset="sunset" />
         <Bounds fit clip observe margin={1.35}>
           <Model />

@@ -1,79 +1,108 @@
 "use client";
 
+import { useState, useEffect, useCallback } from "react";
 import Background from "./components/Background";
 import Scene from "./components/Scene";
 
 export default function Home() {
+  const [progress, setProgress] = useState(0);
+  const [loaded, setLoaded] = useState(false);
+
+  const handleProgress = useCallback((p: number) => {
+    setProgress(p);
+  }, []);
+
+  useEffect(() => {
+    if (progress >= 100) {
+      const t = setTimeout(() => setLoaded(true), 400);
+      return () => clearTimeout(t);
+    }
+  }, [progress]);
+
+  // Fallback: force reveal after 8 seconds
+  useEffect(() => {
+    const t = setTimeout(() => setLoaded(true), 8000);
+    return () => clearTimeout(t);
+  }, []);
+
   return (
-    <div className="relative h-screen w-screen overflow-hidden">
+    <div className="hero-root">
       <Background />
 
-      <div className="relative z-10 flex h-full items-center">
-        {/* Hero text — left */}
-        <div className="flex flex-1 flex-col justify-center pl-12 pr-4 md:pl-20 lg:pl-28">
+      {/* Loading overlay — thin centered bar */}
+      <div
+        className={`loading-overlay${loaded ? " loading-done" : ""}`}
+        aria-hidden={loaded}
+      >
+        <div className="loading-bar-track">
+          <div
+            className="loading-bar-fill"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+      </div>
+
+      {/* Hero */}
+      <div className={`hero-layout${loaded ? " hero-loaded" : ""}`}>
+        {/* 3D model — top on mobile, right on desktop */}
+        <div className="hero-model">
+          <div className="hero-model-glow" aria-hidden="true" />
+          <Scene onProgress={handleProgress} />
+        </div>
+
+        {/* Text — bottom on mobile, left on desktop */}
+        <div className="hero-text">
           <img
             src="/logo-horizontal.svg"
             alt="Haloweave"
-            className="mb-5 h-5 w-auto self-start opacity-80"
+            width={120}
+            height={20}
+            className="hero-reveal hero-logo"
+            style={{ animationDelay: "0.15s" }}
           />
 
           <h1
-            className="mb-3 font-display text-white leading-[1.05] tracking-[-0.03em]"
-            style={{
-              fontSize: "clamp(1.7rem, 3.2vw, 2.8rem)",
-              textWrap: "balance",
-              textShadow:
-                "0 0 40px rgba(240,180,41,0.15), 0 0 80px rgba(240,180,41,0.06)",
-            }}
+            className="hero-reveal hero-heading"
+            style={{ animationDelay: "0.3s" }}
           >
             Built for the next era
             <br />
             of software.
           </h1>
 
-          <p className="mb-4 max-w-lg font-sans text-gold leading-snug"
-            style={{ fontSize: "clamp(0.95rem, 1.3vw, 1.15rem)" }}
+          <p
+            className="hero-reveal hero-subtitle"
+            style={{ animationDelay: "0.45s" }}
           >
-            The future of the web is <span className="font-display uppercase text-white animate-glow">intelligent.</span>
+            The future of the web is{" "}
+            <span className="hero-highlight">intelligent.</span>
           </p>
 
-          <p className="mb-8 max-w-xl font-sans text-[0.85rem] leading-relaxed text-white/55">
+          <p
+            className="hero-reveal hero-body"
+            style={{ animationDelay: "0.6s" }}
+          >
             Products no longer just respond&nbsp;&mdash; they understand,
             assist, and evolve. We work with founders and teams to design
             and build AI products that feel inevitable.
           </p>
 
-          <div className="flex items-center gap-4">
+          <div
+            className="hero-reveal hero-actions"
+            style={{ animationDelay: "0.75s" }}
+          >
             <a href="#contact" className="btn-gold">
-              Begin your mission
+              Begin Your Mission
             </a>
             <a href="#work" className="btn-glass">
-              <span>View our work</span>
+              <span>View Our Work</span>
             </a>
           </div>
         </div>
-
-        {/* 3D model — right */}
-        <div className="relative h-full flex-1">
-          <div
-            className="pointer-events-none absolute top-1/2 left-1/2 z-0 h-[70%] w-[70%] -translate-x-1/2 -translate-y-1/2"
-            style={{
-              background:
-                "radial-gradient(circle, rgba(240,180,41,0.08) 0%, transparent 70%)",
-            }}
-          />
-          <Scene />
-        </div>
       </div>
+
       {/* Noise overlay */}
-      <div
-        className="pointer-events-none absolute inset-0 z-20 opacity-[0.18]"
-        style={{
-          backgroundImage: "url(/noise.png)",
-          backgroundRepeat: "repeat",
-          backgroundSize: "216px auto",
-        }}
-      />
+      <div className="noise-overlay" aria-hidden="true" />
     </div>
   );
 }

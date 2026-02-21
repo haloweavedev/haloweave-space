@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import LenisProvider from "./components/LenisProvider";
 import CustomCursor from "./components/CustomCursor";
@@ -26,6 +26,10 @@ const productSans = localFont({
   ],
   variable: "--font-product-sans",
 });
+
+export const viewport: Viewport = {
+  themeColor: "#0a0a0a",
+};
 
 export const metadata: Metadata = {
   title: "Haloweave — AI Product Studio",

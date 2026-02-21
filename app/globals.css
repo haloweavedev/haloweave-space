@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* ============================================
+   Custom Properties
+   ============================================ */
+
 :root {
   --background: #0a0a0a;
   --foreground: #ededed;
@@ -18,6 +22,14 @@
   --font-display: var(--font-display);
 }
 
+/* ============================================
+   Base
+   ============================================ */
+
+html {
+  color-scheme: dark;
+}
+
 html,
 body {
   margin: 0;
@@ -25,11 +37,21 @@ body {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  overscroll-behavior: none;
   background: var(--background);
   color: var(--foreground);
 }
 
-/* Custom cursor */
+a,
+button {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ============================================
+   Custom Cursor
+   ============================================ */
+
 .custom-cursor {
   position: fixed;
   top: 0;
@@ -43,7 +65,8 @@ body {
   will-change: transform;
   opacity: 0;
   transition: opacity 0.3s;
-  filter: drop-shadow(0 0 6px rgba(240, 180, 41, 0.7)) drop-shadow(0 0 14px rgba(240, 180, 41, 0.4));
+  filter: drop-shadow(0 0 6px rgba(240, 180, 41, 0.7))
+    drop-shadow(0 0 14px rgba(240, 180, 41, 0.4));
 }
 
 .custom-cursor.visible {
@@ -55,11 +78,28 @@ body {
   height: 100%;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   cursor: none !important;
 }
 
-/* Background vertical scroll loop */
+@media (pointer: coarse) {
+  *,
+  *::before,
+  *::after {
+    cursor: auto !important;
+  }
+
+  .custom-cursor {
+    display: none !important;
+  }
+}
+
+/* ============================================
+   Background
+   ============================================ */
+
 .bg-scroll-container {
   position: fixed;
   inset: 0;
@@ -83,7 +123,11 @@ body {
 .bg-scroll-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, transparent 10%, rgba(0, 0, 0, 0.28) 100%);
+  background: radial-gradient(
+    circle at center,
+    transparent 10%,
+    rgba(0, 0, 0, 0.28) 100%
+  );
   pointer-events: none;
 }
 
@@ -96,8 +140,221 @@ body {
   }
 }
 
+/* ============================================
+   Hero Section
+   ============================================ */
+
+/* Root */
+.hero-root {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+/* --- Loading overlay --- */
+
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--background);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.loading-done {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loading-bar-track {
+  width: clamp(80px, 16vw, 160px);
+  height: 2px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.loading-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  border-radius: 1px;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 8px rgba(240, 180, 41, 0.3);
+}
+
+/* --- Layout --- */
+
+.hero-layout {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.hero-model {
+  position: relative;
+  width: 100%;
+  flex: 0 0 38%;
+}
+
+.hero-model-glow {
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 0;
+  width: 70%;
+  height: 70%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle,
+    rgba(240, 180, 41, 0.08) 0%,
+    transparent 70%
+  );
+}
+
+.hero-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 0;
+  padding: 0 clamp(1.25rem, 5vw, 2rem) clamp(1.5rem, 3vh, 2.5rem);
+}
+
+/* Tablet portrait (640–1023px) */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .hero-model {
+    flex: 0 0 44%;
+  }
+
+  .hero-text {
+    padding: 0 clamp(2rem, 6vw, 3.5rem) clamp(2rem, 4vh, 3rem);
+  }
+}
+
+/* Desktop (1024px+) */
+@media (min-width: 1024px) {
+  .hero-layout {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .hero-model {
+    order: 2;
+    flex: 1;
+    height: 100%;
+  }
+
+  .hero-text {
+    order: 1;
+    flex: 1;
+    padding: 0 2rem 0 clamp(3rem, 5vw, 7rem);
+  }
+}
+
+/* --- Typography --- */
+
+.hero-logo {
+  height: clamp(14px, 1.2vw + 6px, 20px);
+  width: auto;
+  align-self: flex-start;
+  opacity: 0.8;
+  margin-bottom: clamp(0.75rem, 1.5vh, 1.25rem);
+}
+
+.hero-heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 1.8vw + 0.7rem, 3rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: white;
+  text-wrap: balance;
+  text-shadow:
+    0 0 40px rgba(240, 180, 41, 0.15),
+    0 0 80px rgba(240, 180, 41, 0.06);
+  margin-bottom: clamp(0.5rem, 1vh, 0.75rem);
+}
+
+.hero-subtitle {
+  font-family: var(--font-product-sans);
+  font-size: clamp(0.9rem, 0.5vw + 0.6rem, 1.15rem);
+  line-height: 1.4;
+  color: var(--gold);
+  margin-bottom: clamp(0.5rem, 1.2vh, 1rem);
+}
+
+.hero-highlight {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  color: white;
+}
+
+.hero-body {
+  font-family: var(--font-product-sans);
+  font-size: clamp(0.8rem, 0.25vw + 0.55rem, 0.9rem);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.55);
+  max-width: 32rem;
+  text-wrap: pretty;
+  margin-bottom: clamp(1rem, 2vh, 2rem);
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.6rem, 2vw, 1rem);
+  flex-wrap: wrap;
+}
+
+/* --- Text reveal animation --- */
+
+@keyframes hero-text-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.hero-loaded .hero-reveal {
+  animation: hero-text-reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* --- Noise overlay --- */
+
+.noise-overlay {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  opacity: 0.18;
+  background-image: url(/noise.png);
+  background-repeat: repeat;
+  background-size: 216px auto;
+}
+
+/* ============================================
+   Glow Animation
+   ============================================ */
+
 @keyframes glow-pulse {
-  0%, 100% {
+  0%,
+  100% {
     text-shadow:
       0 0 10px rgba(240, 180, 41, 0.6),
       0 0 30px rgba(240, 180, 41, 0.4),
@@ -112,18 +369,22 @@ body {
   }
 }
 
-.animate-glow {
+.animate-glow,
+.hero-highlight {
   animation: glow-pulse 3s ease-in-out infinite;
 }
 
-/* Gold button */
+/* ============================================
+   Buttons
+   ============================================ */
+
 .btn-gold {
   position: relative;
   display: inline-flex;
   align-items: center;
-  padding: 11px 24px;
+  padding: 11px clamp(18px, 3vw, 24px);
   border-radius: 33px;
-  font-size: 0.7rem;
+  font-size: clamp(0.6rem, 0.15vw + 0.48rem, 0.7rem);
   font-family: var(--font-product-sans);
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -149,14 +410,13 @@ body {
   outline-offset: 3px;
 }
 
-/* Glass button */
 .btn-glass {
   position: relative;
   display: inline-flex;
   align-items: center;
-  padding: 11px 24px;
+  padding: 11px clamp(18px, 3vw, 24px);
   border-radius: 33px;
-  font-size: 0.7rem;
+  font-size: clamp(0.6rem, 0.15vw + 0.48rem, 0.7rem);
   font-family: var(--font-product-sans);
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -212,8 +472,39 @@ body {
     0 0 20px rgba(240, 180, 41, 0.06);
 }
 
+/* ============================================
+   Reduced Motion
+   ============================================ */
+
 @media (prefers-reduced-motion: reduce) {
   .bg-scroll-track {
     animation: none;
+  }
+
+  .hero-reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero-loaded .hero-reveal {
+    animation: none;
+  }
+
+  .animate-glow,
+  .hero-highlight {
+    animation: none;
+  }
+
+  .loading-overlay {
+    transition: none;
+  }
+
+  .loading-bar-fill {
+    transition: none;
+  }
+
+  .btn-gold,
+  .btn-glass {
+    transition: none;
   }
 }
