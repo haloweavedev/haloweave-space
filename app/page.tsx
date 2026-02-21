@@ -88,11 +88,16 @@ export default function Home() {
           </p>
 
           <div
-            className="hero-reveal hero-badge"
-            style={{ animationDelay: "0.75s" }}
+            className="hero-reveal"
+            style={{ animationDelay: "0.75s", display: "flex", alignItems: "center", gap: "clamp(0.6rem, 2vw, 1rem)", flexWrap: "wrap" }}
           >
-            <span className="badge-dot" aria-hidden="true" />
-            <span>cooking something crazy &mdash; stay tuned</span>
+            <div className="hero-badge">
+              <span className="badge-dot" aria-hidden="true" />
+              <span>cooking something crazy &mdash; stay tuned</span>
+            </div>
+            <a href="mailto:hello@haloweave.com" className="btn-glass">
+              <span>hello@haloweave.com</span>
+            </a>
           </div>
         </div>
       </div>
