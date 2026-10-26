@@ -39,3 +39,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Pre-Linux snapshot: generated files and local credentials
+node_modules/
+.next/
+dist/
+.turbo/
+*.log
+.env
+.env.*
+!.env.example
+!.env.sample
